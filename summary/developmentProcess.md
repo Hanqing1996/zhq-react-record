@@ -21,3 +21,9 @@ yarn add node-sass@npm:dart-sass -D
 ```
  yarn add @types/styled-components@5.0.1 -D
 ```
+
+#### 添加 react-router
+```
+yarn add -D react-router-dom
+yarn add -D @types/react-router-dom
+```
