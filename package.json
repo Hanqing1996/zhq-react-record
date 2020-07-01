@@ -37,6 +37,8 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "npm:dart-sass"
+    "@types/styled-components": "5.0.1",
+    "node-sass": "npm:dart-sass",
+    "styled-components": "5.0.1"
   }
 }
