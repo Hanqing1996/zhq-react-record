@@ -3,7 +3,6 @@
 create-react-app react-record --template typescript
 ```
 
-
 #### [yarn start 时阻止打开浏览器](https://coderrocketfuel.com/article/stop-create-react-app-from-opening-a-browser-window-on-start)
 
 #### dart-sass 比 node-sass 好用得多（后者下载要翻墙，且编译慢）
