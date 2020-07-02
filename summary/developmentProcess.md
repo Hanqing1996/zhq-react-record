@@ -26,3 +26,5 @@ yarn add node-sass@npm:dart-sass -D
 yarn add -D react-router-dom
 yarn add -D @types/react-router-dom
 ```
+
+#### svg-sprite-loader
