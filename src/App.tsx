@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
-import {BrowserRouter as Router, Switch, Link, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import Nav from 'components/Nav';
 
 const Wrapper = styled.div`
     height:100vh;
@@ -10,18 +11,7 @@ const Wrapper = styled.div`
 const Main = styled.div`
     flex-grow: 1;
 `
-const Nav = styled.nav`
-flex-direction: row;
->ul{
-display: flex;
-flex-direction: row;
->li{
-width: 33.3%;
-text-align: center;
-}
-}
 
-`
 
 function App() {
     return (
@@ -44,19 +34,7 @@ function App() {
                         </Route>
                     </Switch>
                 </Main>
-                <Nav>
-                    <ul>
-                        <li>
-                            <Link to='/tags'>标签</Link>
-                        </li>
-                        <li>
-                            <Link to='/money'>记账</Link>
-                        </li>
-                        <li>
-                            <Link to='/statistics'>统计</Link>
-                        </li>
-                    </ul>
-                </Nav>
+                <Nav/>
             </Wrapper>
         </Router>
     );
