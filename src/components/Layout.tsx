@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, {Fragment, ReactNode} from "react";
 import Nav from "./Nav";
 
-const LayoutWrapper = styled.ul`
+const LayoutWrapper = styled.div`
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -19,14 +19,12 @@ interface LayoutProps {
 
 const Layout = (props: LayoutProps) => {
     return (
-        <Fragment>
-            <LayoutWrapper>
-                <Content>
-                    {props.children}
-                </Content>
-                <Nav/>
-            </LayoutWrapper>
-        </Fragment>
+        <LayoutWrapper>
+            <Content>
+                {props.children}
+            </Content>
+            <Nav/>
+        </LayoutWrapper>
     )
 }
 
