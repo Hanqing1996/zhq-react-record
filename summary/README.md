@@ -74,3 +74,5 @@
     </Route>
 </Switch>
 ```
+* [activeClass](https://reactrouter.com/web/api/NavLink/activeclassname-string)
+类比 vue-router 的 active-class 用法
