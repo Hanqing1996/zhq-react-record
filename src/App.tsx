@@ -18,8 +18,6 @@ function App() {
         <div>
             <Router>
                 <Wrapper>
-
-
                     <Main>
                         <Switch>
                             <Route path='/tags'>
