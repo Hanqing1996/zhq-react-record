@@ -3,6 +3,7 @@ import React from "react";
 import Layout from "components/Layout";
 import MoneyTags from "../components/money/MoneyTags";
 import FormItem from "../components/money/FormItem";
+import Types from "../components/money/Types";
 
 
 const Money = () => {
@@ -10,6 +11,7 @@ const Money = () => {
         <Layout>
             <MoneyTags/>
             <FormItem/>
+            <Types/>
         </Layout>
 
     )
