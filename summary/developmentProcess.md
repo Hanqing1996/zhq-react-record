@@ -27,4 +27,40 @@ yarn add -D react-router-dom
 yarn add -D @types/react-router-dom
 ```
 
-#### svg-sprite-loader
+#### svg 怎么用
+1. 当图片用（不推荐）
+```
+import moneyPath from 'icons/money.svg'
+
+console.log(moneyPath) // /static/media/money.fcd4abb3.svg
+
+<image src={moneyPath}/>
+```
+2. 使用 svg symbol（由 svg-sprite-loader 创建）
+```
+import money from './icons/money.svg' // 通过 import 我们引入了一个 symbol 对象
+
+console.log(moneyIcon);// BrowserSpriteSymbol {id: "money", viewBox: "0 0 1024 1024", content: "<symbol class="money" viewBox="0 0 1024 1024" xmln…1.454545 512 81.454545z" p-id="2816" />↵</symbol>", node: symbol#money}
+
+// 注意下面xlinkHref的内容需要与svg的id一致。
+
+<svg>
+    <use xlinkHref="#moneyIcon"></use>
+</svg>
+```
+
+
+#### 添加 svg-sprite-loader
+1. 暴露 webpack 配置文件
+```
+yarn eject
+```
+2. [配置 webpack.config.js](https://github.com/JetBrains/svg-sprite-loader)
+```
+{
+  test: /\.svg$/,
+  use: [
+    { loader: 'svg-sprite-loader', options: { } }
+  ]
+}
+```

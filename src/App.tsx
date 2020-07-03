@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import Nav from 'components/Nav';
+require('./icons/money.svg')
 
 const Wrapper = styled.div`
     height:100vh;
@@ -15,28 +16,35 @@ const Main = styled.div`
 
 function App() {
     return (
-        <Router>
-            <Wrapper>
-                <Main>
-                    <Switch>
-                        <Route path='/tags'>
-                            is tags
-                        </Route>
-                        <Route path='/money'>
-                            is money
-                        </Route>
-                        <Route path='/statistics'>
-                            is statistics
-                        </Route>
-                        <Redirect exact from="/" to="/tags"/>
-                        <Route path='*'>
-                            所找页面不存在！
-                        </Route>
-                    </Switch>
-                </Main>
-                <Nav/>
-            </Wrapper>
-        </Router>
+        <div>
+            <svg>
+                <use xlinkHref="#money"></use>
+            </svg>
+            <Router>
+                <Wrapper>
+
+
+                    <Main>
+                        <Switch>
+                            <Route path='/tags'>
+                                is tags
+                            </Route>
+                            <Route path='/money'>
+                                is money
+                            </Route>
+                            <Route path='/statistics'>
+                                is statistics
+                            </Route>
+                            <Redirect exact from="/" to="/tags"/>
+                            <Route path='*'>
+                                所找页面不存在！
+                            </Route>
+                        </Switch>
+                    </Main>
+                    <Nav/>
+                </Wrapper>
+            </Router>
+        </div>
     );
 }
 

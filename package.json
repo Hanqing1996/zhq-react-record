@@ -87,11 +87,13 @@
     ]
   },
   "devDependencies": {
+    "@babel/helper-create-regexp-features-plugin": "^7.10.4",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "5.0.1",
     "node-sass": "npm:dart-sass",
     "react-router-dom": "^5.2.0",
-    "styled-components": "5.0.1"
+    "styled-components": "5.0.1",
+    "svg-sprite-loader": "^5.0.0"
   },
   "jest": {
     "roots": [
