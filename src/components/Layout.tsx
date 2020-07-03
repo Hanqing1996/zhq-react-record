@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {Fragment, ReactNode} from "react";
+import React, {ReactNode} from "react";
 import Nav from "./Nav";
 
 const LayoutWrapper = styled.div`

@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from 'styled-components'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
-import Nav from 'components/Nav';
+import Tags from "./views/Tags";
+import Statistics from "./views/Statistics";
+import Money from "./views/Money";
 
 const Wrapper = styled.div`
     height:100vh;
     display: flex;   
     flex-direction: column;
-`
-const Main = styled.div`
-    flex-grow: 1;
 `
 
 
@@ -18,24 +17,21 @@ function App() {
         <div>
             <Router>
                 <Wrapper>
-                    <Main>
-                        <Switch>
-                            <Route path='/tags'>
-                                is tags
-                            </Route>
-                            <Route path='/money'>
-                                is money
-                            </Route>
-                            <Route path='/statistics'>
-                                is statistics
-                            </Route>
-                            <Redirect exact from="/" to="/tags"/>
-                            <Route path='*'>
-                                所找页面不存在！
-                            </Route>
-                        </Switch>
-                    </Main>
-                    <Nav/>
+                    <Switch>
+                        <Route path='/money'>
+                            <Money/>
+                        </Route>
+                        <Route path='/tags'>
+                            <Tags/>
+                        </Route>
+                        <Route path='/statistics'>
+                            <Statistics/>
+                        </Route>
+                        <Redirect exact from="/" to="/money"/>
+                        <Route path='*'>
+                            所找页面不存在！
+                        </Route>
+                    </Switch>
                 </Wrapper>
             </Router>
         </div>
