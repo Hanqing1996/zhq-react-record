@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {ChangeEventHandler, Fragment, useState} from "react";
+import React, {ChangeEventHandler, Fragment, FunctionComponent, useState} from "react";
 
 const Notes = styled.label`
         font-size: 14px;
@@ -18,11 +18,16 @@ const Notes = styled.label`
         }
 `
 
-const FormItem = () => {
+interface IProps {
+    fieldName:string,
+    placeholder:string,
+    value:string
+}
 
-    const [value, setValue] = useState<string>('')
-    const fieldName = useState<string>('备注')[0]
-    const placeholder = useState<string>('请输入备注')[0]
+const FormItem:FunctionComponent<IProps> = (props) => {
+
+    const [value, setValue] = useState<string>(props.value)
+    const {fieldName,placeholder} =props
 
     const updateValue:ChangeEventHandler<HTMLInputElement>=(event)=>{
         setValue(event.target.value)

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {MouseEventHandler, useState} from "react";
+import React, {useState} from "react";
 
 const TypeWrapper = styled.ul`
         display: flex;

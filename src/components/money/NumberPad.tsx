@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React, {MouseEventHandler, useState} from "react";
 import {darken} from "polished";
 
-import {ClearFix,InnerShadow} from 'assets/style/style-var'
+import {ClearFix, InnerShadow} from 'assets/style/style-var'
 
 const bg = '#f2f2f2'
 const NumberPadWrapper = styled(InnerShadow)`
@@ -55,24 +55,41 @@ const Buttons = styled(ClearFix)`
 
 const NumberPad = () => {
 
-    const [value,setValue]=useState<number>(0)
+    const value = useState<number>(0)[0]
+    const [output, setOutput] = useState<string>(value!.toString())
 
-    const [output,setOutput]=useState<string>(value!.toString())
-
-    const inputContent:MouseEventHandler<HTMLButtonElement>=(event)=>{
+    const inputContent: MouseEventHandler<HTMLButtonElement> = (event) => {
         const button = (event.target as HTMLButtonElement);
         const input = button.textContent!;
-        if (output.length === 16) { return; }
+        if (output.length === 16) {
+            return;
+        }
         if (output === '0') {
             if ('0123456789'.indexOf(input) >= 0) {
                 setOutput(input)
             } else {
-                setOutput(output+input)
+                setOutput(output + input)
             }
             return;
         }
-        if (output.indexOf('.') >= 0 && input === '.') {return;}
-        setOutput(output+input)
+        if (output.indexOf('.') >= 0 && input === '.') {
+            return;
+        }
+        setOutput(output + input)
+    }
+
+    const remove = () => {
+        if (output.length === 1) {
+            setOutput('0')
+        } else {
+            setOutput(output.slice(0, -1))
+        }
+    }
+    const clear = () => {
+        setOutput('0')
+    }
+    const ok = () => {
+        setOutput('0')
     }
 
     return (
@@ -82,16 +99,16 @@ const NumberPad = () => {
                 <button onClick={inputContent}>1</button>
                 <button onClick={inputContent}>2</button>
                 <button onClick={inputContent}>3</button>
-                <button>删除</button>
+                <button onClick={remove}>删除</button>
                 <button onClick={inputContent}>4</button>
                 <button onClick={inputContent}>5</button>
                 <button onClick={inputContent}>6</button>
-                <button>清空</button>
+                <button onClick={clear}>清空</button>
                 <button onClick={inputContent}>7</button>
                 <button onClick={inputContent}>8</button>
                 <button onClick={inputContent}>9</button>
-                <button className='ok'>OK</button>
-                <button onClick={inputContent} className='zero' >0</button>
+                <button onClick={ok} className='ok'>OK</button>
+                <button onClick={inputContent} className='zero'>0</button>
                 <button onClick={inputContent}>.</button>
             </Buttons>
         </NumberPadWrapper>

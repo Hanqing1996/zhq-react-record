@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {Fragment, useEffect, useState} from "react";
+import React, {FunctionComponent, useEffect, useState} from "react";
 import {darken} from "polished";
 
 const TagsWrapper = styled.div`
@@ -49,21 +49,34 @@ type Tag = {
     name: string
 }
 
-const MoneyTags = () => {
+interface IProps {
+    tags: Tag[],
+    selectedTags:string[],
+    onUpdateTags: (tags: Tag[]) => void,
+    onUpdateSelectedTags:(selectedTags:string[])=>void
+}
 
-    const [tags, setTags] = useState<Tag[]>([])
-    const [selectedTags, setSelectedTags] = useState<string[]>([])
+const MoneyTags: FunctionComponent<IProps> = (props) => {
+
+    const [tags, setTags] = useState<Tag[]>(props.tags)
+    const [selectedTags, setSelectedTags] = useState<string[]>(props.selectedTags)
 
     // mounted
     useEffect(() => {
-        const tags = [
-            {id: 1, name: 'fuck'},
-            {id: 2, name: 'fuck2'},
-            {id: 3, name: 'fuck3'},
-            {id: 4, name: 'fuck4'},
-        ]
-        setTags(tags)
+
     }, [])
+
+    // watch
+    useEffect(() => {
+        props.onUpdateTags(tags)
+    }, [tags])
+
+    useEffect(() => {
+        props.onUpdateSelectedTags(selectedTags)
+    }, [selectedTags])
+
+
+
 
     const createTag = () => {
         const name = window.prompt('请输入标签名');
@@ -71,7 +84,6 @@ const MoneyTags = () => {
             window.alert('标签名不能为空');
         } else {
             setTags([...tags, {id: 5, name}])
-
         }
     }
 
