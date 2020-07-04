@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Layout from "components/Layout";
 import {Link} from "react-router-dom";
 import Icon from "../components/Icon";
 import Button from "components/Button";
 
 
-const TagWrapper=styled.div`
+const TagWrapper = styled.div`
     background: white;
     font-size: 16px;
     padding-left: 16px;
@@ -25,26 +25,38 @@ const TagWrapper=styled.div`
     }
 `
 
-const CreateTagWrapper=styled.div`
+const CreateTagWrapper = styled.div`
     text-align: center;
     padding: 16px;
     margin-top: 44-16px;
 `
 
+type Tag = {
+    id: number,
+    name: string
+}
 
 const Tags = () => {
 
-    const tags = [
-        {id: 1, name: 'fuck'},
-        {id: 2, name: 'fuck2'},
-        {id: 3, name: 'fuck3'},
-        {id: 4, name: 'fuck4'},
-    ]
+    const [tags, setTags] = useState<Tag[]>([])
+
+    // mounted
+    useEffect(() => {
+        console.log('mounted');
+        const tags = [
+            {id: 1, name: 'fuck'},
+            {id: 2, name: 'fuck2'},
+            {id: 3, name: 'fuck3'},
+            {id: 4, name: 'fuck4'},
+        ]
+        setTags(tags)
+    }, [])
+
 
     return (
         <Layout>
             <TagWrapper>
-                {tags.map(tag => <Link
+                {tags && tags.map((tag: Tag) => <Link
                     className='tag'
                     to={`/labels/edit/${tag.id}`}
                     key={tag.id}>
@@ -58,8 +70,6 @@ const Tags = () => {
                     新建标签
                 </Button>
             </CreateTagWrapper>
-
-
         </Layout>
 
     )

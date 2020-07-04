@@ -87,6 +87,26 @@ const NumberPadWrapper = styled.div`
     backgound:${bg}
 `
 ```
+* extend
+> 与 scss 的 extend 相比，Styled-Component 必须指定 tag
+```
+// style-var.js
+
+export const ClearFix=styled.div`
+  &::after {
+    content: '';
+    clear: both;
+    display: block;
+  }
+` 
+```
+```
+// NumberPad.tsx
+ 
+// Buttons 继承了 ClearFix 的样式
+const Buttons = styled(ClearFix)`
+`
+```
 
 #### polished
 > 为了弥补 Styled-Component 对 scss 兼容性不足（比如 darken）而使用的 css in js 库

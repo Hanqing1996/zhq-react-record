@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {Fragment} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 
 const TagsWrapper = styled.div`
     background-color: white;
@@ -38,14 +38,36 @@ const NewTag = styled.div`
     }
 `
 
+type Tag = {
+    id: number,
+    name: string
+}
+
 const MoneyTags = () => {
 
-    const tags = [
-        {id: 1, name: 'fuck'},
-        {id: 2, name: 'fuck2'},
-        {id: 3, name: 'fuck3'},
-        {id: 4, name: 'fuck4'},
-    ]
+    const [tags, setTags] = useState<Tag[]>([])
+
+    // mounted
+    useEffect(() => {
+        const tags = [
+            {id: 1, name: 'fuck'},
+            {id: 2, name: 'fuck2'},
+            {id: 3, name: 'fuck3'},
+            {id: 4, name: 'fuck4'},
+        ]
+        setTags(tags)
+    }, [])
+
+    const createTag = () => {
+        console.log('add');
+        const name = window.prompt('请输入标签名');
+        if (!name) {
+            window.alert('标签名不能为空');
+        } else {
+            setTags([...tags,{id:5,name}])
+
+        }
+    }
 
     return (
         <TagsWrapper>
@@ -56,7 +78,10 @@ const MoneyTags = () => {
                 </li>)}
             </CurrentTags>
             <NewTag>
-                <button>新增标签</button>
+                <button onClick={() => {
+                    createTag()
+                }}>新增标签
+                </button>
             </NewTag>
         </TagsWrapper>
 
