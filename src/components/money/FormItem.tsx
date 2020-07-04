@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import React, {Fragment} from "react";
+import React, {ChangeEventHandler, Fragment, useState} from "react";
 
-const Notes=styled.label`
+const Notes = styled.label`
         font-size: 14px;
         background: #f5f5f5;
         padding-left: 16px;
@@ -20,14 +20,19 @@ const Notes=styled.label`
 
 const FormItem = () => {
 
-    const fieldName='备注'
-    const placeholder='请输入备注'
+    const [value, setValue] = useState<string>('')
+    const fieldName = useState<string>('备注')[0]
+    const placeholder = useState<string>('请输入备注')[0]
+
+    const updateValue:ChangeEventHandler<HTMLInputElement>=(event)=>{
+        setValue(event.target.value)
+    }
 
     return (
         <Fragment>
             <Notes>
                 <span className="name">{fieldName}</span>
-                <input type="text" placeholder={placeholder}/>
+                <input type="text" placeholder={placeholder} value={value} onChange={(event)=>{updateValue(event)}}/>
             </Notes>
         </Fragment>
     )

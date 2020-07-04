@@ -122,3 +122,21 @@ const CurrentTags = styled.ul`
     }
 `
 ```
+
+#### bean knowledge
+* react 的 onChange 和 input 的原生 onChange 触发是不一样的
+> react 的 onChange 是只要用户输入，就会触发的
+```
+// updateValue 在用户输入过程中不断被触发
+const updateValue:ChangeEventHandler<HTMLInputElement>=(event)=>{
+    setValue(event.target.value)
+    console.log('zes');
+}
+
+return (
+    <Fragment>
+         <input type="text" onChange={(event)=>{updateValue(event)}}/>
+    </Fragment>
+)
+```
+> input 的原生 onChange 是当用户输入，并将鼠标移开 input 后才会触发的，且早于 onBlur 被触发
