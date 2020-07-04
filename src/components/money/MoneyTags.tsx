@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React, {Fragment, useEffect, useState} from "react";
+import {darken} from "polished";
 
 const TagsWrapper = styled.div`
     background-color: white;
@@ -12,19 +13,24 @@ const TagsWrapper = styled.div`
     flex-wrap: wrap;
 `
 
+const bg = '#d9d9d9';
 const CurrentTags = styled.ul`
     display: flex;
     flex-wrap: wrap;
     max-height: 12vh;
     overflow: auto;
     > li {
-        background: #d9d9d9;
+        background: ${bg};
         height: 24px;
         line-height: 24px;
         border-radius: 12px;
         padding: 0 16px;
         margin-right: 12px;
         margin-top: 4px;
+        &.selected {
+            background: ${darken(0.5, bg)};      
+            color: white;
+        }
     }
 `
 const NewTag = styled.div`
@@ -46,6 +52,7 @@ type Tag = {
 const MoneyTags = () => {
 
     const [tags, setTags] = useState<Tag[]>([])
+    const [selectedTags, setSelectedTags] = useState<string[]>([])
 
     // mounted
     useEffect(() => {
@@ -59,20 +66,36 @@ const MoneyTags = () => {
     }, [])
 
     const createTag = () => {
-        console.log('add');
         const name = window.prompt('请输入标签名');
         if (!name) {
             window.alert('标签名不能为空');
         } else {
-            setTags([...tags,{id:5,name}])
+            setTags([...tags, {id: 5, name}])
 
         }
+    }
+
+    const toggle = (tagName: string) => {
+        const index = selectedTags.indexOf(tagName)
+        if (index >= 0) {
+            const copy = JSON.parse(JSON.stringify(selectedTags))
+            copy.splice(index, 1)
+            setSelectedTags(copy)
+        } else {
+            setSelectedTags([...selectedTags, tagName])
+        }
+    }
+
+    const isSelected = (tagName: string): string => {
+        return selectedTags.indexOf(tagName) >= 0 ? 'selected' : ''
     }
 
     return (
         <TagsWrapper>
             <CurrentTags>
                 {tags.map(tag => <li
+                    onClick={() => toggle(tag.name)}
+                    className={isSelected(tag.name)}
                     key={tag.id}>
                     {tag.name}
                 </li>)}

@@ -111,3 +111,14 @@ const Buttons = styled(ClearFix)`
 #### polished
 > 为了弥补 Styled-Component 对 scss 兼容性不足（比如 darken）而使用的 css in js 库
 * [文档](https://polished.js.org/docs/)
+```
+import {darken} from "polished";
+
+const CurrentTags = styled.ul`
+    > li {
+        &.selected {
+            background: ${darken(0.5, bg)}; // polish 的 darken     
+        }
+    }
+`
+```
