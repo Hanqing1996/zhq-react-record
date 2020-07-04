@@ -12,7 +12,7 @@ const TagsWrapper = styled.div`
     flex-wrap: wrap;
 `
 
-const CurrentTags=styled.ul`
+const CurrentTags = styled.ul`
     display: flex;
     flex-wrap: wrap;
     max-height: 12vh;
@@ -27,7 +27,7 @@ const CurrentTags=styled.ul`
         margin-top: 4px;
     }
 `
-const NewTag=styled.div`
+const NewTag = styled.div`
     padding-top: 16px;
     button {
         background: transparent;
@@ -48,20 +48,17 @@ const MoneyTags = () => {
     ]
 
     return (
-        <Fragment>
-            <TagsWrapper>
-                <CurrentTags>
-                    {tags.map(tag => <li
-                        key={tag.id}>
-                        {tag.name}
-                    </li>)}
-                </CurrentTags>
-
-            </TagsWrapper>
+        <TagsWrapper>
+            <CurrentTags>
+                {tags.map(tag => <li
+                    key={tag.id}>
+                    {tag.name}
+                </li>)}
+            </CurrentTags>
             <NewTag>
                 <button>新增标签</button>
             </NewTag>
-        </Fragment>
+        </TagsWrapper>
 
     )
 }

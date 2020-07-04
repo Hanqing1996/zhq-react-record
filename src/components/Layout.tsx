@@ -10,6 +10,8 @@ const LayoutWrapper = styled.div`
 `
 const Content = styled.div`
     overflow: auto;
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
 `
 
