@@ -29,20 +29,23 @@ const TypeWrapper = styled.ul`
 
 const Types = () => {
 
-    const [selectedType,setSelectedType]=useState<string>('+')
+    const typesMap: { [key: string]: any } = {'+': '收入', '-': '支出'}
+
+    const [selectedType, setSelectedType] = useState<keyof typeof typesMap>('+')
 
     const isSelected = (type: string): string => {
-        return type===selectedType?'selected' : ''
+        return type === selectedType ? 'selected' : ''
     }
 
-    const toggle=(type:string)=>{
+    const toggle = (type: string) => {
         setSelectedType(type)
     }
 
     return (
         <TypeWrapper>
-            <li className={isSelected('+')} onClick={()=>{toggle('+')}}>收入</li>
-            <li className={isSelected('-')} onClick={()=>{toggle('-')}}>支出</li>
+            {Object.keys(typesMap).map(key =>
+                <li key={key} onClick={()=>toggle(key)} className={isSelected(key)}>{typesMap[key]}</li>
+            )}
         </TypeWrapper>
     )
 }
