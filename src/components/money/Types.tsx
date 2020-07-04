@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, {MouseEventHandler, useState} from "react";
 
 const TypeWrapper = styled.ul`
         display: flex;
@@ -28,10 +28,21 @@ const TypeWrapper = styled.ul`
 
 
 const Types = () => {
+
+    const [selectedType,setSelectedType]=useState<string>('+')
+
+    const isSelected = (type: string): string => {
+        return type===selectedType?'selected' : ''
+    }
+
+    const toggle=(type:string)=>{
+        setSelectedType(type)
+    }
+
     return (
         <TypeWrapper>
-            <li className='selected'>收入</li>
-            <li>支出</li>
+            <li className={isSelected('+')} onClick={()=>{toggle('+')}}>收入</li>
+            <li className={isSelected('-')} onClick={()=>{toggle('-')}}>支出</li>
         </TypeWrapper>
     )
 }
