@@ -2,9 +2,17 @@ import styled from "styled-components";
 import React from "react";
 
 import 'assets/style/var.scss'
+import {darken} from "polished";
 
 
-const bg='#f2f2f2'
+// styled-components usage
+const div = styled.div`
+  background: ${darken(0.2, '#FFCD64')};
+  background: ${darken('0.2', 'rgba(255,205,100,0.7)')};
+`
+
+
+const bg = '#f2f2f2'
 const NumberPadWrapper = styled.div`
         > .output {
             font-size: 36px;
@@ -33,22 +41,22 @@ const NumberPadWrapper = styled.div`
                     background: ${bg};
                 }
                 &:nth-child(2), &:nth-child(5) {
-                    background: darken(${bg}, 4*1%);
+                    background:${darken(4 * 0.01, bg)};      
                 }
                 &:nth-child(3), &:nth-child(6), &:nth-child(9) {
-                    background: darken(${bg}, 4*2%);
+                    background: ${darken(4 * 0.02, bg)};     
                 }
                 &:nth-child(4), &:nth-child(7), &:nth-child(10) {
-                    background: darken(${bg}, 4*3%);
+                    background: ${darken(4 * 0.03, bg)};     
                 }
                 &:nth-child(8), &:nth-child(11), &:nth-child(13) {
-                    background: darken(${bg}, 4*4%);
+                    background: ${darken(4 * 0.04, bg)};     
                 }
                 &:nth-child(14) {
-                    background: darken(${bg}, 4*5%);
+                    background: ${darken(4 * 0.05, bg)};     
                 }
                 &:nth-child(12) {
-                    background: darken(${bg}, 4*6%);
+                    background: ${darken(4 * 0.06, bg)};     
                 }
             }
         }

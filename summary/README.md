@@ -76,3 +76,18 @@
 ```
 * [activeClass](https://reactrouter.com/web/api/NavLink/activeclassname-string)
 类比 vue-router 的 active-class 用法
+
+#### Styled-Component
+> 用 js 写 css 的库
+* 变量不能像 scss 一样直接内部定义并使用，必须使用外部的 js 变量
+```
+const bg='#f2f2f2'
+
+const NumberPadWrapper = styled.div`
+    backgound:${bg}
+`
+```
+
+#### polished
+> 为了弥补 Styled-Component 对 scss 兼容性不足（比如 darken）而使用的 css in js 库
+* [文档](https://polished.js.org/docs/)
