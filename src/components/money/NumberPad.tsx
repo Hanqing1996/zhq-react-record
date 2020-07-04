@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, {MouseEventHandler, useState} from "react";
 import {darken} from "polished";
 
 import {ClearFix,InnerShadow} from 'assets/style/style-var'
@@ -54,24 +54,45 @@ const Buttons = styled(ClearFix)`
 `
 
 const NumberPad = () => {
+
+    const [value,setValue]=useState<number>(0)
+
+    const [output,setOutput]=useState<string>(value!.toString())
+
+    const inputContent:MouseEventHandler<HTMLButtonElement>=(event)=>{
+        const button = (event.target as HTMLButtonElement);
+        const input = button.textContent!;
+        if (output.length === 16) { return; }
+        if (output === '0') {
+            if ('0123456789'.indexOf(input) >= 0) {
+                setOutput(input)
+            } else {
+                setOutput(output+input)
+            }
+            return;
+        }
+        if (output.indexOf('.') >= 0 && input === '.') {return;}
+        setOutput(output+input)
+    }
+
     return (
         <NumberPadWrapper>
-            <div className="output"></div>
+            <div className="output">{output}</div>
             <Buttons>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
+                <button onClick={inputContent}>1</button>
+                <button onClick={inputContent}>2</button>
+                <button onClick={inputContent}>3</button>
                 <button>删除</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
+                <button onClick={inputContent}>4</button>
+                <button onClick={inputContent}>5</button>
+                <button onClick={inputContent}>6</button>
                 <button>清空</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
+                <button onClick={inputContent}>7</button>
+                <button onClick={inputContent}>8</button>
+                <button onClick={inputContent}>9</button>
                 <button className='ok'>OK</button>
-                <button className='zero'>0</button>
-                <button>.</button>
+                <button onClick={inputContent} className='zero' >0</button>
+                <button onClick={inputContent}>.</button>
             </Buttons>
         </NumberPadWrapper>
     )
