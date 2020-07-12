@@ -43,4 +43,4 @@ const FormItem:FunctionComponent<IProps> = (props) => {
     )
 }
 
-export default FormItem
+export default React.memo(FormItem)

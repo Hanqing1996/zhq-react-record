@@ -115,4 +115,4 @@ const NumberPad = () => {
     )
 }
 
-export default NumberPad
+export default React.memo(NumberPad)

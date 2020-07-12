@@ -20,6 +20,7 @@ interface LayoutProps {
 }
 
 const Layout = (props: LayoutProps) => {
+
     return (
         <LayoutWrapper>
             <Content>
@@ -30,4 +31,4 @@ const Layout = (props: LayoutProps) => {
     )
 }
 
-export default Layout
+export default React.memo(Layout)

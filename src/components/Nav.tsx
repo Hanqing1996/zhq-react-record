@@ -28,6 +28,7 @@ const NavItem = styled.li`
 `
 
 const Nav = () => {
+
     return (
         <NavWrapper>
             <NavItem>
@@ -58,4 +59,4 @@ const Nav = () => {
     )
 }
 
-export default Nav
+export default React.memo(Nav)

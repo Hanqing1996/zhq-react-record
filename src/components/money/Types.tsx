@@ -50,4 +50,4 @@ const Types = () => {
     )
 }
 
-export default Types
+export default React.memo(Types)

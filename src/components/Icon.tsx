@@ -13,6 +13,7 @@ height: 3em;
 
 
 const Icon:React.FunctionComponent<iconProps> = ({name}) => {
+
     return (
         <IconWrapper>
             <use xlinkHref={`#${name}`}></use>
