@@ -123,8 +123,4 @@ const MoneyTags: FunctionComponent<IProps> = (props) => {
     )
 }
 
-export default MoneyTags
-
-
-
-
+export default React.memo(MoneyTags)

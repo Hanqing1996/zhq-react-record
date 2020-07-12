@@ -140,3 +140,15 @@ return (
 )
 ```
 > input 的原生 onChange 是当用户输入，并将鼠标移开 input 后才会触发的，且早于 onBlur 被触发
+
+
+#### React.StrictMode
+会导致组件render两次
+```
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+```

@@ -12,31 +12,35 @@ type Tag = {
 }
 
 const Money = () => {
-
     const [tags, setTags] = useState<Tag[]>([
         {id: 1, name: 'fuck'},
         {id: 2, name: 'fuck2'},
         {id: 3, name: 'fuck3'},
         {id: 4, name: 'fuck4'},
     ])
-
     const [selectedTags, setSelectedTags] = useState<string[]>([])
+    const [value, setValue] = useState<string>('')
 
-    const onUpdateTags = (tags: Tag []) => {
-        console.log('onUpdateTags');
-        setTags(tags)
-    }
+    // 当 Money 因为 value 的更新而重新 render 时，传递给 MoneyTags 的函数引用不变，从而保证 MoneyTags 不做多余的 render
+    const onUpdateTags=useCallback((newTags)=>{
+        setTags(newTags)
+    },[tags])
 
-    const onUpdateSelectedTags = (tags: string[]) => {
-        console.log('onUpdateSelectedTags');
-        setSelectedTags(tags)
-    }
+    const onUpdateSelectedTags=useCallback((newSelectedTags)=>{
+        setSelectedTags(newSelectedTags)
+    },[selectedTags])
+
+    // 当 Money 因为 tags/selectedTags 的更新而重新 render 时，传递给 FormItem 的函数引用不变，从而保证 FormItem 不做多余的 render
+    const onUpdateValue=useCallback((newValue)=>{
+        setValue(newValue)
+    },[value])
 
     return (
         <Layout>
+
             <MoneyTags tags={tags} selectedTags={selectedTags} onUpdateTags={onUpdateTags}
                        onUpdateSelectedTags={onUpdateSelectedTags}/>
-            <FormItem fieldName="备注" placeholder="请在这里输入备注" value=''/>
+            <FormItem fieldName="备注" placeholder="请在这里输入备注" value={value} onUpdateValue={onUpdateValue}/>
             <Types/>
             <NumberPad/>
         </Layout>
