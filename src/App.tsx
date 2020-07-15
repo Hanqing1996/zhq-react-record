@@ -18,15 +18,9 @@ function App() {
             <Router>
                 <Wrapper>
                     <Switch>
-                        <Route path='/money'>
-                            <Money/>
-                        </Route>
-                        <Route path='/tags'>
-                            <Tags/>
-                        </Route>
-                        <Route path='/statistics'>
-                            <Statistics/>
-                        </Route>
+                        <Route path='/money' component={Money}/>
+                        <Route path='/tags' component={Tags}/>
+                        <Route path='/statistics' component={Statistics}/>
                         <Redirect exact from="/" to="/money"/>
                         <Route path='*'>
                             所找页面不存在！

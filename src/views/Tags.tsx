@@ -41,7 +41,7 @@ const Tags = () => {
             <TagWrapper>
                 {tags && tags.map((tag: Tag) => <Link
                     className='tag'
-                    to={`/labels/edit/${tag.id}`}
+                    to={`/tags/edit/${tag.id}`}
                     key={tag.id}>
                     <span>{tag.name}</span>
                     <Icon name="right"/>
