@@ -162,12 +162,36 @@ ReactDOM.render(
     * amount 作为 props（不放入 useState）
     * output 作为 state（放入 useState,初始值来自 props.amount）
     
-#### custom hook
-1. 单个子组件-父组件的 props 到子组件UI的映射逻辑（类似于HOC将业务逻辑封装到父组件内部）
-```
+#### custom hook:封装组件的 state 相关逻辑
+1. 单个子组件-父组件的 props 到子组件UI的映射逻辑（类似于HOC将业务逻辑封装到父组件内部）。也不一定需要父组件 props，只要是足够独立的，由子组件自身维护的 state，就可以封装成 custom hook。
+    * useOutput:setOutput 不暴露，只暴露业务方法
+2. 多个组件-逻辑复用（比如两个组件内的都用到 tag，就应该抽离出公共逻辑）。这也是基于 1 的。毕竟封装的一大目的就是复用。
+    * useTags:注意没有用到父组件的 props
+    
 
-```    
-2. 多个组件-逻辑复用（比如两个 useState 的初始值相同，就应该抽离出公共逻辑）
+#### 关于 useState 的初始值
+* 不好的写法：在 useEffect 中赋值
 ```
+const [tags, setTags] = useState<Tag[]>([])
 
+// mounted
+useEffect(() => {
+    console.log('mounted');
+    const tags = [
+        {id: 1, name: 'fuck'},
+        {id: 2, name: 'fuck2'},
+        {id: 3, name: 'fuck3'},
+        {id: 4, name: 'fuck4'},
+    ]
+    setTags(tags)
+}, [])
+```
+* 好的写法：直接传入 useState（代码行数少）
+```
+const [tags, setTags] = useState<Tag[]>([
+    {id: 1, name: 'fuck'},
+    {id: 2, name: 'fuck2'},
+    {id: 3, name: 'fuck3'},
+    {id: 4, name: 'fuck4'},
+])
 ```

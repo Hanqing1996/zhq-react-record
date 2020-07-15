@@ -2,6 +2,8 @@ import styled from "styled-components";
 import React, {FunctionComponent, useEffect, useState} from "react";
 import {darken} from "polished";
 
+import useTags from "../../store/useTags";
+
 const TagsWrapper = styled.div`
     background-color: white;
     font-size: 14px;
@@ -44,11 +46,6 @@ const NewTag = styled.div`
     }
 `
 
-type Tag = {
-    id: number,
-    name: string
-}
-
 interface IProps {
     selectedTags: string[],
     onUpdateSelectedTags: (selectedTags: string[]) => void
@@ -56,21 +53,7 @@ interface IProps {
 
 const MoneyTags: FunctionComponent<IProps> = (props) => {
 
-    const [tags,setTags] = useState<Tag[]>([
-        {id: 1, name: 'fuck'},
-        {id: 2, name: 'fuck2'},
-        {id: 3, name: 'fuck3'},
-        {id: 4, name: 'fuck4'},
-    ])
-
-    const createTag = () => {
-        const name = window.prompt('请输入标签名');
-        if (!name) {
-            window.alert('标签名不能为空');
-        } else {
-            setTags([...tags, {id: 5, name}])
-        }
-    }
+    const {tags,createTag}=useTags()
 
     const toggle = (tagName: string) => {
         const index = props.selectedTags.indexOf(tagName)

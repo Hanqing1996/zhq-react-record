@@ -4,6 +4,7 @@ import Layout from "components/Layout";
 import {Link} from "react-router-dom";
 import Icon from "../components/Icon";
 import Button from "components/Button";
+import useTags from "../store/useTags";
 
 
 const TagWrapper = styled.div`
@@ -31,35 +32,9 @@ const CreateTagWrapper = styled.div`
     margin-top: 44-16px;
 `
 
-type Tag = {
-    id: number,
-    name: string
-}
-
 const Tags = () => {
 
-    const [tags, setTags] = useState<Tag[]>([])
-
-    // mounted
-    useEffect(() => {
-        console.log('mounted');
-        const tags = [
-            {id: 1, name: 'fuck'},
-            {id: 2, name: 'fuck2'},
-            {id: 3, name: 'fuck3'},
-            {id: 4, name: 'fuck4'},
-        ]
-        setTags(tags)
-    }, [])
-
-    const createTag = () => {
-        const name = window.prompt('请输入标签名');
-        if (!name) {
-            window.alert('标签名不能为空');
-        } else {
-            setTags([...tags, {id: 5, name}])
-        }
-    }
+    const {tags,createTag}=useTags()
 
     return (
         <Layout>

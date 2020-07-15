@@ -61,7 +61,7 @@ interface IProps {
 
 const NumberPad = (props: IProps) => {
 
-    const {output, setOutput, updateWithInput, remove, clear, ok} = useOutput(props.amount.toString())
+    const {output, updateWithInput, remove, clear, ok} = useOutput(props.amount.toString())
 
     useEffect(() => {
         props.onUpdateAmount(Number(output))
