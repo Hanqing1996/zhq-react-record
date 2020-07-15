@@ -19,31 +19,18 @@ const Notes = styled.label`
 `
 
 interface IProps {
-    fieldName: string,
-    placeholder: string,
     value: string;
     onUpdateValue: (value: string) => void
 }
 
 const FormItem: FunctionComponent<IProps> = (props) => {
 
-    const [value, setValue] = useState<string>(props.value)
-    const {fieldName, placeholder} = props
-
-    const updateValue: ChangeEventHandler<HTMLInputElement> = (event) => {
-        setValue(event.target.value)
-    }
-
-    useEffect(() => {
-        props.onUpdateValue(value)
-    }, [value])
-
     return (
         <Fragment>
             <Notes>
-                <span className="name">{fieldName}</span>
-                <input type="text" placeholder={placeholder} value={value} onChange={(event) => {
-                    updateValue(event)
+                <span className="name">备注</span>
+                <input type="text" placeholder="请在这里输入备注" value={props.value} onChange={(event) => {
+                    props.onUpdateValue(event.target.value)
                 }}/>
             </Notes>
         </Fragment>

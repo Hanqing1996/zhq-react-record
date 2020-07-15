@@ -152,3 +152,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
+#### MoneyTags
+* tags 作为 state（放入 useState)，因为 MoneyTags 自身维护 tags,父组件不干涉
+* selectedTags 作为 props（不放入 useState），因为 MoneyTags 自身不维护 selectedTags,由父组件维护

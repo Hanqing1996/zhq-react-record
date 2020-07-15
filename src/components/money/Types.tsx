@@ -26,25 +26,24 @@ const TypeWrapper = styled.ul`
         }
 `
 
+interface IProps {
+    type: string,
+    onUpdateType: (newType: string) => void
+}
 
-const Types = () => {
+
+const Types = (props: IProps) => {
 
     const typesMap: { [key: string]: any } = {'+': '收入', '-': '支出'}
 
-    const [selectedType, setSelectedType] = useState<keyof typeof typesMap>('+')
-
     const isSelected = (type: string): string => {
-        return type === selectedType ? 'selected' : ''
-    }
-
-    const toggle = (type: string) => {
-        setSelectedType(type)
+        return type === props.type ? 'selected' : ''
     }
 
     return (
         <TypeWrapper>
             {Object.keys(typesMap).map(key =>
-                <li key={key} onClick={()=>toggle(key)} className={isSelected(key)}>{typesMap[key]}</li>
+                <li key={key} onClick={() => props.onUpdateType(key)} className={isSelected(key)}>{typesMap[key]}</li>
             )}
         </TypeWrapper>
     )

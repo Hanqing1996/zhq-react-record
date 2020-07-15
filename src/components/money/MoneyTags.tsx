@@ -50,31 +50,18 @@ type Tag = {
 }
 
 interface IProps {
-    tags: Tag[],
-    selectedTags:string[],
-    onUpdateTags: (tags: Tag[]) => void,
-    onUpdateSelectedTags:(selectedTags:string[])=>void
+    selectedTags: string[],
+    onUpdateSelectedTags: (selectedTags: string[]) => void
 }
 
 const MoneyTags: FunctionComponent<IProps> = (props) => {
 
-    const [tags, setTags] = useState<Tag[]>(props.tags)
-    const [selectedTags, setSelectedTags] = useState<string[]>(props.selectedTags)
-
-    // mounted
-    useEffect(() => {
-
-    }, [])
-
-    // watch
-    useEffect(() => {
-        props.onUpdateTags(tags)
-    }, [tags])
-
-    useEffect(() => {
-        props.onUpdateSelectedTags(selectedTags)
-    }, [selectedTags])
-
+    const [tags,setTags] = useState<Tag[]>([
+        {id: 1, name: 'fuck'},
+        {id: 2, name: 'fuck2'},
+        {id: 3, name: 'fuck3'},
+        {id: 4, name: 'fuck4'},
+    ])
 
     const createTag = () => {
         const name = window.prompt('请输入标签名');
@@ -86,18 +73,18 @@ const MoneyTags: FunctionComponent<IProps> = (props) => {
     }
 
     const toggle = (tagName: string) => {
-        const index = selectedTags.indexOf(tagName)
+        const index = props.selectedTags.indexOf(tagName)
         if (index >= 0) {
-            const copy = JSON.parse(JSON.stringify(selectedTags))
+            const copy = JSON.parse(JSON.stringify(props.selectedTags))
             copy.splice(index, 1)
-            setSelectedTags(copy)
+            props.onUpdateSelectedTags(copy)
         } else {
-            setSelectedTags([...selectedTags, tagName])
+            props.onUpdateSelectedTags([...props.selectedTags, tagName])
         }
     }
 
     const isSelected = (tagName: string): string => {
-        return selectedTags.indexOf(tagName) >= 0 ? 'selected' : ''
+        return props.selectedTags.indexOf(tagName) >= 0 ? 'selected' : ''
     }
 
     return (
