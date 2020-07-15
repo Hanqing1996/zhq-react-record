@@ -52,6 +52,14 @@ const Tags = () => {
         setTags(tags)
     }, [])
 
+    const createTag = () => {
+        const name = window.prompt('请输入标签名');
+        if (!name) {
+            window.alert('标签名不能为空');
+        } else {
+            setTags([...tags, {id: 5, name}])
+        }
+    }
 
     return (
         <Layout>
@@ -63,10 +71,11 @@ const Tags = () => {
                     <span>{tag.name}</span>
                     <Icon name="right"/>
                 </Link>)}
-
             </TagWrapper>
             <CreateTagWrapper>
-                <Button>
+                <Button onClick={() => {
+                    createTag()
+                }}>
                     新建标签
                 </Button>
             </CreateTagWrapper>

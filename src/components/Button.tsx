@@ -11,13 +11,14 @@ const ButtonWrapper=styled.button`
 `
 
 interface ButtonProps {
+    onClick:()=>void;
     children:ReactNode
 }
 
-const Button = (props:ButtonProps) => {
+const Button = ({onClick,children}:ButtonProps) => {
     return (
-        <ButtonWrapper>
-            {props.children}
+        <ButtonWrapper onClick={onClick}>
+            {children}
         </ButtonWrapper>
     )
 }
