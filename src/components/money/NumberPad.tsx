@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import React, {MouseEventHandler, useState} from "react";
+import React, {MouseEventHandler, useEffect, useState} from "react";
 import {darken} from "polished";
-
 import {ClearFix, InnerShadow} from 'assets/style/style-var'
+
+import useOutput from 'custom-hook/useOutput'
 
 const bg = '#f2f2f2'
 const NumberPadWrapper = styled(InnerShadow)`
@@ -53,43 +54,23 @@ const Buttons = styled(ClearFix)`
         }
 `
 
-const NumberPad = () => {
+interface IProps {
+    amount: number,
+    onUpdateAmount: (newAmount: number) => void
+}
 
-    const value = useState<number>(0)[0]
-    const [output, setOutput] = useState<string>(value!.toString())
+const NumberPad = (props: IProps) => {
+
+    const {output, setOutput, updateWithInput, remove, clear, ok} = useOutput(props.amount.toString())
+
+    useEffect(() => {
+        props.onUpdateAmount(Number(output))
+    }, [output])
 
     const inputContent: MouseEventHandler<HTMLButtonElement> = (event) => {
         const button = (event.target as HTMLButtonElement);
         const input = button.textContent!;
-        if (output.length === 16) {
-            return;
-        }
-        if (output === '0') {
-            if ('0123456789'.indexOf(input) >= 0) {
-                setOutput(input)
-            } else {
-                setOutput(output + input)
-            }
-            return;
-        }
-        if (output.indexOf('.') >= 0 && input === '.') {
-            return;
-        }
-        setOutput(output + input)
-    }
-
-    const remove = () => {
-        if (output.length === 1) {
-            setOutput('0')
-        } else {
-            setOutput(output.slice(0, -1))
-        }
-    }
-    const clear = () => {
-        setOutput('0')
-    }
-    const ok = () => {
-        setOutput('0')
+        updateWithInput(input);
     }
 
     return (

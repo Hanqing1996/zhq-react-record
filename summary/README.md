@@ -153,6 +153,21 @@ ReactDOM.render(
 );
 ```
 
-#### MoneyTags
-* tags 作为 state（放入 useState)，因为 MoneyTags 自身维护 tags,父组件不干涉
-* selectedTags 作为 props（不放入 useState），因为 MoneyTags 自身不维护 selectedTags,由父组件维护
+#### 什么该放入 useState
+> 需要组件自身维护的变量，就该放入 useState
+* MoneyTags
+    * tags 作为 state（放入 useState,初始值来自 localStorage)，因为 MoneyTags 自身维护 tags,父组件不干涉
+    * selectedTags 作为 props（不放入 useState），因为 MoneyTags 自身不维护 selectedTags,由父组件维护
+* NumberPad
+    * amount 作为 props（不放入 useState）
+    * output 作为 state（放入 useState,初始值来自 props.amount）
+    
+#### custom hook
+1. 单个子组件-父组件的 props 到子组件UI的映射逻辑（类似于HOC将业务逻辑封装到父组件内部）
+```
+
+```    
+2. 多个组件-逻辑复用（比如两个 useState 的初始值相同，就应该抽离出公共逻辑）
+```
+
+```

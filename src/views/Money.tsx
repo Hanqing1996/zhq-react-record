@@ -11,6 +11,7 @@ const Money = () => {
     const [selectedTags, setSelectedTags] = useState<string[]>([])
     const [value, setValue] = useState<string>('')
     const [type, setType] = useState<string>('+')
+    const [amount, setAmount] = useState<number>(0)
 
     // 当 Money 因为 value 的更新而重新 render 时，传递给 MoneyTags 的函数引用不变，从而保证 MoneyTags 不做多余的 render
     const onUpdateSelectedTags = useCallback((newSelectedTags) => {
@@ -22,16 +23,21 @@ const Money = () => {
         setValue(newValue)
     }, [value])
 
+    // 同上理
     const onUpdateType = useCallback((newType) => {
         setType(newType)
     }, [type])
+
+    const onUpdateAmount=useCallback((newAmount)=>{
+        setAmount(newAmount)
+    },[amount])
 
     return (
         <Layout>
             <MoneyTags selectedTags={selectedTags} onUpdateSelectedTags={onUpdateSelectedTags}/>
             <FormItem value={value} onUpdateValue={onUpdateValue}/>
             <Types type={type} onUpdateType={onUpdateType}/>
-            <NumberPad/>
+            <NumberPad amount={amount} onUpdateAmount={onUpdateAmount}/>
         </Layout>
 
     )
