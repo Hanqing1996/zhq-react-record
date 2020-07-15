@@ -7,6 +7,7 @@ const LayoutWrapper = styled.div`
     display: flex;
     flex-direction: column;
     border: 1px solid black;
+    background-color: #f5f5f5;
 `
 const Content = styled.div`
     overflow: auto;
@@ -16,12 +17,13 @@ const Content = styled.div`
 `
 
 interface LayoutProps {
-    children: ReactNode
+    children: ReactNode;
 }
 
 const Layout = (props: LayoutProps) => {
 
     return (
+
         <LayoutWrapper>
             <Content>
                 {props.children}

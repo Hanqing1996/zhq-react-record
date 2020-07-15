@@ -76,7 +76,6 @@
 ```
 * [activeClass](https://reactrouter.com/web/api/NavLink/activeclassname-string)
 类比 vue-router 的 active-class 用法
-* 
 
 #### Styled-Component
 > 用 js 写 css 的库
@@ -108,6 +107,32 @@ export const ClearFix=styled.div`
 const Buttons = styled(ClearFix)`
 `
 ```
+* <strong>可以对组件加样式！</strong>但是必须注明是加在组件的哪个节点上
+```
+// EditTag.tsx
+import FormItem from "../components/money/FormItem";
+
+const Edit=styled(FormItem)`
+        background: white;
+        margin-top: 8px;
+`
+<Edit className='edit' value='' fieldName="标签名" placeholder="请在这里输入标签名" onUpdateValue={() => {
+}}/>
+```
+```
+// FormItem.tsx:指明将 Edit 这个 className 加在哪里
+const FormItem: FunctionComponent<IProps> = (props) => {
+
+    return (
+        <Fragment>
+            <Notes className={props.className}>
+            ...
+            </Notes>
+        </Fragment>
+    )
+}
+```
+
 
 #### polished
 > 为了弥补 Styled-Component 对 scss 兼容性不足（比如 darken）而使用的 css in js 库

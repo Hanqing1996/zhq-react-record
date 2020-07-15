@@ -28,14 +28,14 @@ const Money = () => {
         setType(newType)
     }, [type])
 
-    const onUpdateAmount=useCallback((newAmount)=>{
+    const onUpdateAmount = useCallback((newAmount) => {
         setAmount(newAmount)
-    },[amount])
+    }, [amount])
 
     return (
         <Layout>
             <MoneyTags selectedTags={selectedTags} onUpdateSelectedTags={onUpdateSelectedTags}/>
-            <FormItem value={value} onUpdateValue={onUpdateValue}/>
+            <FormItem fieldName='备注' placeholder='请在这里输入备注' value={value} onUpdateValue={onUpdateValue}/>
             <Types type={type} onUpdateType={onUpdateType}/>
             <NumberPad amount={amount} onUpdateAmount={onUpdateAmount}/>
         </Layout>

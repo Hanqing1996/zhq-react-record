@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {ChangeEventHandler, Fragment, FunctionComponent, useEffect, useState} from "react";
+import React, {ChangeEventHandler, Fragment, FunctionComponent, HTMLAttributes, useEffect, useState} from "react";
 
 const Notes = styled.label`
         font-size: 14px;
@@ -18,7 +18,9 @@ const Notes = styled.label`
         }
 `
 
-interface IProps {
+interface IProps extends HTMLAttributes<HTMLDivElement> {
+    fieldName: string,
+    placeholder: string,
     value: string;
     onUpdateValue: (value: string) => void
 }
@@ -26,14 +28,12 @@ interface IProps {
 const FormItem: FunctionComponent<IProps> = (props) => {
 
     return (
-        <Fragment>
-            <Notes>
-                <span className="name">备注</span>
-                <input type="text" placeholder="请在这里输入备注" value={props.value} onChange={(event) => {
-                    props.onUpdateValue(event.target.value)
-                }}/>
-            </Notes>
-        </Fragment>
+        <Notes className={props.className}>
+            <span className="name">{props.fieldName}</span>
+            <input type="text" placeholder={props.placeholder} value={props.value} onChange={(event) => {
+                props.onUpdateValue(event.target.value)
+            }}/>
+        </Notes>
     )
 }
 

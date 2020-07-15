@@ -3,16 +3,16 @@ import React from "react";
 import '../helpers/importAllIcons'
 
 interface iconProps extends React.SVGAttributes<SVGElement> {
-    name:string
+    name: string
 }
 
-const IconWrapper=styled.svg`
+const IconWrapper = styled.svg`
 width: 3em;
 height: 3em;
 `
 
 
-const Icon:React.FunctionComponent<iconProps> = ({name}) => {
+const Icon: React.FunctionComponent<iconProps> = ({name}) => {
 
     return (
         <IconWrapper>
