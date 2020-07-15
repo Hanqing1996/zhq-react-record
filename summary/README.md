@@ -40,7 +40,7 @@
 </Switch>
 ```
 * [设置首页](https://stackoverflow.com/questions/29552601/how-to-set-the-defaultroute-to-another-route-in-react-router)
-> Redirect 的 from='/xxx',to='/yyy' 表示 path 为 xxx 时必然重定向到 yyy。exact 表示精确定位from，如果没有 exact 且 from='/',那么 path='/unexist'时也会重定向到'yyy'
+> Redirect 的 from='/xxx',to='/yyy' 表示 path 以 xxx 开头时必然重定向到 yyy。exact 表示精确定位from，如果没有 exact 且 from='/',那么 path='/unexist'时也会重定向到'yyy'
 ```
 // 比如设置 money 页为首页
 
@@ -196,3 +196,7 @@ const [tags, setTags] = useState<Tag[]>([
     {id: 4, name: 'fuck4'},
 ])
 ```
+
+
+#### 路由表
+> react-record 的 App.tsx,类比于 zhq-record 的 src/router/index.ts。以 from 和 to 的键值对形式标识了 path 与 component 的对应关系

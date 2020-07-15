@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 import Tags from "./views/Tags";
 import Statistics from "./views/Statistics";
 import Money from "./views/Money";
+import EditTag from "./views/EditTag";
 
 const Wrapper = styled.div`
     height:100vh;
@@ -19,7 +20,8 @@ function App() {
                 <Wrapper>
                     <Switch>
                         <Route path='/money' component={Money}/>
-                        <Route path='/tags' component={Tags}/>
+                        <Route exact path='/tags' component={Tags}/>
+                        <Route path='/tags/edit/:tagId' component={EditTag}/>
                         <Route path='/statistics' component={Statistics}/>
                         <Redirect exact from="/" to="/money"/>
                         <Route path='*'>
