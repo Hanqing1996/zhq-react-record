@@ -132,7 +132,20 @@ const FormItem: FunctionComponent<IProps> = (props) => {
     )
 }
 ```
+* useParams
+```
+// App.tsx
+<Route path='/tags/edit/:tagId' component={EditTag}/>
 
+// EditTag.tsx
+const EditTag = () => {
+    
+    let { tagId } = useParams();
+    console.log(tagId);
+
+    ...
+}
+```
 
 #### polished
 > 为了弥补 Styled-Component 对 scss 兼容性不足（比如 darken）而使用的 css in js 库
@@ -193,6 +206,7 @@ ReactDOM.render(
     * useOutput:setOutput 不暴露，只暴露业务方法
 2. 多个组件-逻辑复用（比如两个组件内的都用到 tag，就应该抽离出公共逻辑）。这也是基于 1 的。毕竟封装的一大目的就是复用。
     * useTags:注意没有用到父组件的 props
+    * useValue
     
 
 #### 关于 useState 的初始值
@@ -225,3 +239,5 @@ const [tags, setTags] = useState<Tag[]>([
 
 #### 路由表
 > react-record 的 App.tsx,类比于 zhq-record 的 src/router/index.ts。以 from 和 to 的键值对形式标识了 path 与 component 的对应关系
+
+

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {MouseEventHandler, useEffect, useState} from "react";
+import React, {MouseEventHandler, useEffect} from "react";
 import {darken} from "polished";
 import {ClearFix, InnerShadow} from 'assets/style/style-var'
 

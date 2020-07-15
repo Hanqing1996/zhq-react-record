@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {FunctionComponent, useEffect, useState} from "react";
+import React, {FunctionComponent} from "react";
 import {darken} from "polished";
 
 import useTags from "../../store/useTags";

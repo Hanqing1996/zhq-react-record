@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {ChangeEventHandler, Fragment, FunctionComponent, HTMLAttributes, useEffect, useState} from "react";
+import React, {FunctionComponent, HTMLAttributes} from "react";
 
 const Notes = styled.label`
         font-size: 14px;
