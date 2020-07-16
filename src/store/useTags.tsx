@@ -4,7 +4,6 @@ import createId from "../lib/idCreator";
 console.log('useTags render');
 
 
-
 const initialValue = [
     {id: createId(), name: '衣'},
     {id: createId(), name: '食'},
@@ -20,26 +19,26 @@ const useTags = () => {
         if (!name) {
             window.alert('标签名不能为空');
         } else {
-            console.log('noew');
             setTags([...tags, {id: createId(), name}])
         }
     }
 
     const findTag = (targetId: number) => {
-        console.log('tags');
-        console.log(tags);
-        console.log('targetId');
-        console.log(targetId);
-
-        const tag=tags.filter(tag => tag.id == targetId)[0]
-
-        console.log('get');
-        console.log(tag);
+        const tag = tags.filter(tag => tag.id == targetId)[0]
         return tag
     }
 
+    const updateTag = (targetId: number, object: { name: string }) => {
+        const {name} = object
 
-    return {tags, createTag,findTag}
+        const copy = tags
+        const tag = copy.filter(tag => tag.id == targetId)[0]
+        tag.name = name
+        setTags(copy)
+    }
+
+
+    return {tags, createTag, findTag, updateTag}
 }
 
 export default useTags

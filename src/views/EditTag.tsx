@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router";
 import Layout from "../components/Layout";
 import FormItem from "../components/money/FormItem";
@@ -39,17 +39,13 @@ const Edit = styled(FormItem)`
 
 const EditTag = () => {
 
-    const [tagId] = useState(useParams<{ tagId: string }>().tagId);
-    console.log(tagId);
-    const {findTag} = useTags()
-    console.log(findTag);
-    const [tag, setTag] = useState(findTag(Number(tagId)))
-    console.log(tag);
+    const tagId = Number(useParams<{ tagId: string }>().tagId)
+    const {findTag, updateTag} = useTags()
+    const tag = findTag(tagId)
     const {value, onUpdateValue} = useValue(tag.name)
 
-
     useEffect(() => {
-        setTag({...tag, name: value})
+        updateTag(tagId, {...tag, name: value})
     }, [value])
 
     return (
