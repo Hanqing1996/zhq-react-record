@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
 import Layout from "../components/Layout";
 import FormItem from "../components/money/FormItem";
@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 import Button from "../components/Button";
 import styled from "styled-components";
 import useValue from "../custom-hook/useValue";
+import useTags from "../store/useTags";
 
 
 const NavBar = styled.div`
@@ -37,10 +38,19 @@ const Edit = styled(FormItem)`
 `
 
 const EditTag = () => {
-    const {value, onUpdateValue} = useValue()
 
-    let {tagId} = useParams();
+    const [tagId] = useState(useParams<{ tagId: string }>().tagId);
     console.log(tagId);
+    const {findTag} = useTags()
+    console.log(findTag);
+    const [tag, setTag] = useState(findTag(Number(tagId)))
+    console.log(tag);
+    const {value, onUpdateValue} = useValue(tag.name)
+
+
+    useEffect(() => {
+        setTag({...tag, name: value})
+    }, [value])
 
     return (
         <Layout>

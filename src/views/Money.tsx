@@ -12,7 +12,7 @@ const Money = () => {
     const [type, setType] = useState<string>('+')
     const [amount, setAmount] = useState<number>(0)
 
-    const {value, onUpdateValue} = useValue()
+    const {value, onUpdateValue} = useValue('')
 
     // 当 Money 因为 value 的更新而重新 render 时，传递给 MoneyTags 的函数引用不变，从而保证 MoneyTags 不做多余的 render
     const onUpdateSelectedTags = useCallback((newSelectedTags) => {

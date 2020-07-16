@@ -1,17 +1,19 @@
 import {useState} from 'react';
 import createId from "../lib/idCreator";
 
-const useTags = () => {
+console.log('useTags render');
 
-    const [tags, setTags] = useState<Tag []>(()=>{
-        console.log('getInitialValue execute');
-        return [
-            {id: createId(), name: '衣'},
-            {id: createId(), name: '食'},
-            {id: createId(), name: '住'},
-            {id: createId(), name: '行'},
-        ]
-    })
+
+
+const initialValue = [
+    {id: createId(), name: '衣'},
+    {id: createId(), name: '食'},
+    {id: createId(), name: '住'},
+    {id: createId(), name: '行'},
+]
+
+const useTags = () => {
+    const [tags, setTags] = useState<Tag []>(initialValue)
 
     const createTag = () => {
         const name = window.prompt('请输入标签名');
@@ -23,7 +25,21 @@ const useTags = () => {
         }
     }
 
-    return {tags, createTag}
+    const findTag = (targetId: number) => {
+        console.log('tags');
+        console.log(tags);
+        console.log('targetId');
+        console.log(targetId);
+
+        const tag=tags.filter(tag => tag.id == targetId)[0]
+
+        console.log('get');
+        console.log(tag);
+        return tag
+    }
+
+
+    return {tags, createTag,findTag}
 }
 
 export default useTags
