@@ -1,9 +1,9 @@
 import {useState} from 'react';
 
-const useOutput=(amount:string)=>{
-    const [output,setOutput]=useState<string>(amount)
+const useOutput = (amount: string) => {
+    const [output, setOutput] = useState<string>(amount)
 
-    const updateWithInput=(input:string)=>{
+    const updateWithInput = (input: string) => {
         if (output.length === 16) {
             return;
         }
@@ -21,7 +21,7 @@ const useOutput=(amount:string)=>{
         setOutput(output + input)
     }
 
-    const remove=()=>{
+    const remove = () => {
         if (output.length === 1) {
             setOutput('0')
         } else {
@@ -32,11 +32,12 @@ const useOutput=(amount:string)=>{
     const clear = () => {
         setOutput('0')
     }
-    const ok = () => {
+    const ok = (callback: () => void) => {
         setOutput('0')
+        callback()
     }
 
-    return {output,setOutput,updateWithInput,remove,clear,ok}
+    return {output, setOutput, updateWithInput, remove, clear, ok}
 }
 
 export default useOutput

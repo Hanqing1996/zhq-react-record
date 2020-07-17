@@ -56,7 +56,8 @@ const Buttons = styled(ClearFix)`
 
 interface IProps {
     amount: number,
-    onUpdateAmount: (newAmount: number) => void
+    onUpdateAmount: (newAmount: number) => void,
+    onSubmit:()=>void
 }
 
 const NumberPad = (props: IProps) => {
@@ -88,7 +89,7 @@ const NumberPad = (props: IProps) => {
                 <button onClick={inputContent}>7</button>
                 <button onClick={inputContent}>8</button>
                 <button onClick={inputContent}>9</button>
-                <button onClick={ok} className='ok'>OK</button>
+                <button onClick={()=>{ok(props.onSubmit)}} className='ok'>OK</button>
                 <button onClick={inputContent} className='zero'>0</button>
                 <button onClick={inputContent}>.</button>
             </Buttons>

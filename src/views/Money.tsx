@@ -4,13 +4,19 @@ import MoneyTags from "../components/money/MoneyTags";
 import FormItem from "../components/money/FormItem";
 import Types from "../components/money/Types";
 import NumberPad from "../components/money/NumberPad";
+import useRecords from "../store/useRecords";
 
 const Money = () => {
 
     const [selectedTags, setSelectedTags] = useState<string[]>([])
-    const [type, setType] = useState<string>('+')
+    const [type, setType] = useState<'+' | '-'>('+')
     const [amount, setAmount] = useState<number>(0)
     const [value, setValue] = useState<string>('')
+
+    const {records, addRecord} = useRecords()
+
+    console.log('records');
+    console.log(records);
 
     // 避免子组件多余 render
     const onUpdateValue = useCallback((newValue) => {
@@ -31,12 +37,27 @@ const Money = () => {
         setAmount(newAmount)
     }, [amount])
 
+    const onSubmit = () => {
+        const tagNames = selectedTags
+        const note = value
+
+        addRecord({tagNames, note, type, amount})
+        resetSelected()
+    }
+
+    const resetSelected = () => {
+        setSelectedTags([])
+        setType('+')
+        setAmount(0)
+        setValue('')
+    }
+
     return (
         <Layout>
             <MoneyTags selectedTags={selectedTags} onUpdateSelectedTags={onUpdateSelectedTags}/>
             <FormItem fieldName='备注' placeholder='请在这里输入备注' value={value} onUpdateValue={onUpdateValue}/>
             <Types type={type} onUpdateType={onUpdateType}/>
-            <NumberPad amount={amount} onUpdateAmount={onUpdateAmount}/>
+            <NumberPad amount={amount} onUpdateAmount={onUpdateAmount} onSubmit={onSubmit}/>
         </Layout>
 
     )
