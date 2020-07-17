@@ -269,3 +269,56 @@ custom-hook 只是逻辑层面的封装，<strong>只是做了代码拆分，把
 
 
 
+#### useEffect 是异步执行的 
+> useRecords.tsx 中的 useEffect 是异步执行的。在执行useRecords时，会先执行函数useRecords内的所有同步代码，再执行Statistic.tsx的同步代码，然后才执行 useRecords.tsx 中的 useEffect
+```
+// useRecords.tsx
+const useRecords = () => {
+
+    const [records, setRecords] = useState<any []>([])
+
+    useEffect(() => {
+        setRecords(JSON.parse(window.localStorage.getItem('records') || '[]'))
+    }, [])
+}
+```
+```
+//Statistic.tsx
+const Statistics = () => {
+    const {records} = useRecords()
+    console.log(records) // 第一次输出[],第二次才输出[{...},{...}]
+}
+```
+* 但是注意 useState 是同步的
+```
+const [type, setType] = useState<'+' | '-'>('+')
+console.log(type) // type
+```
+
+#### displayRecords始终根据records,type生成
+> 第一次render时，records是[],type是'+',第二次render时，records才是[{...},{...}]
+
+> 计算属性？
+
+> 不要担心[]
+```
+const {records} = useRecords()
+const [type, setType] = useState<'+' | '-'>('+')
+const [displayRecords,setDisplayRecords] = useState<RecordItem[]>([])
+
+useEffect(()=>{
+    const copy=clone(records)
+    const result=copy.filter(record=>record.type===type)
+    setDisplayRecords(result)
+
+},[records,type])
+```
+不如直接写成
+```
+const {records} = useRecords()
+const [type, setType] = useState<'+' | '-'>('+')
+const displayRecords=records.filter(record=>record.type===type)
+```
+即displayRecords始终根据records,type生成。
+
+

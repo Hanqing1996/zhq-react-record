@@ -2,7 +2,8 @@ import {useEffect, useState} from 'react';
 import useUpdate from "../custom-hook/useUpdate";
 
 const useRecords = () => {
-    const [records, setRecords] = useState<RecordItem []>([])
+
+    const [records, setRecords] = useState<any []>([])
 
     useEffect(() => {
         setRecords(JSON.parse(window.localStorage.getItem('records') || '[]'))
