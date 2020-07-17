@@ -7,5 +7,6 @@ type RecordItem={
     tagNames:string[],
     note:string,
     type:'+'|'-',
-    amount:number
+    amount:number,
+    createdAt:string
 }

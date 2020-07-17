@@ -8,8 +8,10 @@ const useRecords = () => {
         setRecords(JSON.parse(window.localStorage.getItem('records') || '[]'))
     }, [])
 
-    const addRecord = (record: RecordItem) => {
-        setRecords([...records, record])
+    const addRecord = (record: Omit<RecordItem,'createdAt'>) => {
+        const createdAt = new Date().toISOString();
+        const newRecord: RecordItem = {...record, createdAt} as RecordItem
+        setRecords([...records, newRecord])
         window.alert('添加记录成功！');
     }
 
@@ -17,7 +19,7 @@ const useRecords = () => {
         window.localStorage.setItem('records', JSON.stringify(records))
     }, [records])
 
-    return {records,addRecord}
+    return {records, addRecord}
 }
 
 export default useRecords
