@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import createId from "../lib/idCreator";
 import useUpdate from "../custom-hook/useUpdate";
+import clone from "../lib/clone";
 
 const useTags = () => {
     const [tags, setTags] = useState<Tag []>([])
@@ -20,7 +21,7 @@ const useTags = () => {
             window.alert('标签名不能为空');
         } else {
 
-            const copy = JSON.parse(JSON.stringify(tags))
+            const copy = clone(tags)
             copy.push({id: createId(), name})
             setTags(copy)
         }
@@ -34,7 +35,7 @@ const useTags = () => {
     const updateTag = (targetId: number, object: { name: string }) => {
         const {name} = object
 
-        const copy = JSON.parse(JSON.stringify(tags))
+        const copy = clone(tags)
         const tag = copy.filter((tag: Tag) => tag.id == targetId)[0]
         tag.name = name
         setTags(copy)
@@ -42,7 +43,7 @@ const useTags = () => {
 
     const deleteTag = (targetId: number) => {
 
-        const copy = JSON.parse(JSON.stringify(tags))
+        const copy = clone(tags)
         const idList = copy.map((tag: Tag) => tag.id)
         const targetIndex = idList.indexOf(targetId)
         copy.splice(targetIndex, 1)
