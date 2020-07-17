@@ -205,36 +205,9 @@ ReactDOM.render(
 1. 单个子组件-父组件的 props 到子组件UI的映射逻辑（类似于HOC将业务逻辑封装到父组件内部）。也不一定需要父组件 props，只要是足够独立的，由子组件自身维护的 state，就可以封装成 custom hook。
     * useOutput:setOutput 不暴露，只暴露业务方法
 2. 多个组件-逻辑复用（比如两个组件内的都用到 tag，就应该抽离出公共逻辑）。这也是基于 1 的。毕竟封装的一大目的就是复用。
-    * useTags:注意没有用到父组件的 props
-    * useValue
-    
-
-#### 关于 useState 的初始值
-* 不好的写法：在 useEffect 中赋值
-```
-const [tags, setTags] = useState<Tag[]>([])
-
-// mounted
-useEffect(() => {
-    console.log('mounted');
-    const tags = [
-        {id: 1, name: 'fuck'},
-        {id: 2, name: 'fuck2'},
-        {id: 3, name: 'fuck3'},
-        {id: 4, name: 'fuck4'},
-    ]
-    setTags(tags)
-}, [])
-```
-* 好的写法：直接传入 useState（代码行数少）
-```
-const [tags, setTags] = useState<Tag[]>([
-    {id: 1, name: 'fuck'},
-    {id: 2, name: 'fuck2'},
-    {id: 3, name: 'fuck3'},
-    {id: 4, name: 'fuck4'},
-])
-```
+    * useTags
+    * useUpdate:含有依赖数组的 useEffect 在第一次 render 时不被触发
+ 
 
 
 #### 路由表
@@ -286,31 +259,10 @@ const EditTag = () => {
 }
 ```
 
-#### setState 的参数如果是数组或对象
-* bug
-以下的 setTags 不奏效，即 tags 不会更新。因为 copy 是 tags 的浅拷贝，setTags 察觉到参数的引用与之前的tags相同，则不会去改动 tags
-```
-const deleteTag = (targetId: number) => {
-
-    const copy = tags
-    const idList = copy.map((tag: Tag) => tag.id)
-    const targetIndex = idList.indexOf(targetId)
-    copy.splice(targetIndex, 1)
-    setTags(copy)
-}
-```
-* 解决方法：改用深拷贝
-```
-const deleteTag = (targetId: number) => {
-
-    const copy = JSON.parse(JSON.stringify(tags))
-    const idList = copy.map((tag: Tag) => tag.id)
-    const targetIndex = idList.indexOf(targetId)
-    copy.splice(targetIndex, 1)
-    setTags(copy)
-}
-```
-
-
-
 #### 组件内的公共逻辑不能有多余（比如，无论 tag 有没有，公共逻辑都是必要的），有多余的应该封装到别的地方
+
+
+#### "还原为整体"法
+custom-hook 只是逻辑层面的封装，<strong>只是做了代码拆分，把原先写在组件里的代码封装到函数或对象里而已</strong>
+
+也就是说，custom-hook 里的 useState,useRef 和直接写在组件里的 useState,useRef 没有任何区别，说到底还是服务于某个组件的。

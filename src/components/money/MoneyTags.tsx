@@ -53,7 +53,7 @@ interface IProps {
 
 const MoneyTags: FunctionComponent<IProps> = (props) => {
 
-    const {tags,createTag}=useTags()
+    const {tags, createTag} = useTags()
 
     const toggle = (tagName: string) => {
         const index = props.selectedTags.indexOf(tagName)

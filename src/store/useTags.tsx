@@ -1,18 +1,19 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import createId from "../lib/idCreator";
-
-console.log('useTags render');
-
-
-const initialValue = [
-    {id: createId(), name: '衣'},
-    {id: createId(), name: '食'},
-    {id: createId(), name: '住'},
-    {id: createId(), name: '行'},
-]
+import useUpdate from "../custom-hook/useUpdate";
 
 const useTags = () => {
-    const [tags, setTags] = useState<Tag []>(initialValue)
+    const [tags, setTags] = useState<Tag []>([])
+
+    useEffect(() => {
+        console.log('setTags');
+        setTags(JSON.parse(window.localStorage.getItem('tags') || '[]'))
+    }, [])
+
+    // 只在 update,delete,create 时执行回调函数
+    useUpdate(() => {
+        window.localStorage.setItem('tags', JSON.stringify(tags))
+    }, [tags])
 
     const createTag = () => {
         const name = window.prompt('请输入标签名');
@@ -48,7 +49,6 @@ const useTags = () => {
         copy.splice(targetIndex, 1)
         setTags(copy)
     }
-
 
     return {tags, createTag, findTag, updateTag, deleteTag}
 }
