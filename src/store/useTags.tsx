@@ -19,7 +19,10 @@ const useTags = () => {
         if (!name) {
             window.alert('标签名不能为空');
         } else {
-            setTags([...tags, {id: createId(), name}])
+
+            const copy = JSON.parse(JSON.stringify(tags))
+            copy.push({id: createId(), name})
+            setTags(copy)
         }
     }
 
@@ -31,14 +34,23 @@ const useTags = () => {
     const updateTag = (targetId: number, object: { name: string }) => {
         const {name} = object
 
-        const copy = tags
-        const tag = copy.filter(tag => tag.id == targetId)[0]
+        const copy = JSON.parse(JSON.stringify(tags))
+        const tag = copy.filter((tag: Tag) => tag.id == targetId)[0]
         tag.name = name
         setTags(copy)
     }
 
+    const deleteTag = (targetId: number) => {
 
-    return {tags, createTag, findTag, updateTag}
+        const copy = JSON.parse(JSON.stringify(tags))
+        const idList = copy.map((tag: Tag) => tag.id)
+        const targetIndex = idList.indexOf(targetId)
+        copy.splice(targetIndex, 1)
+        setTags(copy)
+    }
+
+
+    return {tags, createTag, findTag, updateTag, deleteTag}
 }
 
 export default useTags

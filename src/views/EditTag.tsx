@@ -6,7 +6,6 @@ import Icon from "../components/Icon";
 import {Link} from "react-router-dom";
 import Button from "../components/Button";
 import styled from "styled-components";
-import useValue from "../custom-hook/useValue";
 import useTags from "../store/useTags";
 
 
@@ -40,15 +39,28 @@ const Edit = styled(FormItem)`
 const EditTag = () => {
 
     const tagId = Number(useParams<{ tagId: string }>().tagId)
-    const {findTag, updateTag} = useTags()
+    const {findTag, updateTag, deleteTag} = useTags()
     const tag = findTag(tagId)
-    const {value, onUpdateValue} = useValue(tag.name)
 
-    useEffect(() => {
-        updateTag(tagId, {...tag, name: value})
-    }, [value])
+    const TagContent = (tag: Tag) => {
+        return (
+            <>
+                <Edit className='edit' value={tag.name} fieldName="标签名" placeholder="请在这里输入标签名" onUpdateValue={
+                    (value) => {
+                        updateTag(tagId, {...tag, name: value})
+                    }
+                }/>
+                <DeleteWrapper>
+                    <Button onClick={() => {
+                        deleteTag(tagId)
+                    }}>删除标签</Button>
+                </DeleteWrapper>
+            </>)
+    }
 
     return (
+
+
         <Layout>
             <NavBar>
                 <Link to="/tags">
@@ -56,11 +68,8 @@ const EditTag = () => {
                 </Link>
                 <span className="title">编辑标签</span>
             </NavBar>
-            <Edit className='edit' value={value} fieldName="标签名" placeholder="请在这里输入标签名" onUpdateValue={onUpdateValue}/>
-            <DeleteWrapper>
-                <Button onClick={() => {
-                }}>删除标签</Button>
-            </DeleteWrapper>
+
+            {tag ? TagContent(tag) : <div>不存在</div>}
         </Layout>
 
     )
