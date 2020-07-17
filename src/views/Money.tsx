@@ -15,8 +15,6 @@ const Money = () => {
 
     const {records, addRecord} = useRecords()
 
-    console.log('records');
-    console.log(records);
 
     // 避免子组件多余 render
     const onUpdateValue = useCallback((newValue) => {

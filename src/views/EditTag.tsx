@@ -45,7 +45,7 @@ const EditTag = () => {
     const TagContent = (tag: Tag) => {
         return (
             <>
-                <Edit className='edit' value={tag.name} fieldName="标签名" placeholder="请在这里输入标签名" onUpdateValue={
+                <Edit value={tag.name} fieldName="标签名" placeholder="请在这里输入标签名" onUpdateValue={
                     (value) => {
                         updateTag(tagId, {...tag, name: value})
                     }

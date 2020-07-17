@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React from "react";
+import React, {HTMLAttributes} from "react";
 
 const TypeWrapper = styled.ul`
         display: flex;
@@ -26,7 +26,7 @@ const TypeWrapper = styled.ul`
         }
 `
 
-interface IProps {
+interface IProps extends HTMLAttributes<HTMLDivElement>{
     type: string,
     onUpdateType: (newType: string) => void
 }
@@ -41,7 +41,7 @@ const Types = (props: IProps) => {
     }
 
     return (
-        <TypeWrapper>
+        <TypeWrapper className={props.className}>
             {Object.keys(typesMap).map(key =>
                 <li key={key} onClick={() => props.onUpdateType(key)} className={isSelected(key)}>{typesMap[key]}</li>
             )}

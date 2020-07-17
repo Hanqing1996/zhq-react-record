@@ -116,7 +116,7 @@ const Edit=styled(FormItem)`
         background: white;
         margin-top: 8px;
 `
-<Edit className='edit' value='' fieldName="标签名" placeholder="请在这里输入标签名" onUpdateValue={() => {
+<Edit value='' fieldName="标签名" placeholder="请在这里输入标签名" onUpdateValue={() => {
 }}/>
 ```
 ```
