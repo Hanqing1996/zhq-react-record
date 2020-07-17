@@ -266,3 +266,6 @@ const EditTag = () => {
 custom-hook 只是逻辑层面的封装，<strong>只是做了代码拆分，把原先写在组件里的代码封装到函数或对象里而已</strong>
 
 也就是说，custom-hook 里的 useState,useRef 和直接写在组件里的 useState,useRef 没有任何区别，说到底还是服务于某个组件的。
+
+
+
