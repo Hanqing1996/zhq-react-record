@@ -24,6 +24,10 @@ const Item = styled.div`
     }
 `
 
+const Date = styled.h3`
+padding: 10px 16px;
+`
+
 const Statistics = () => {
 
     const {records} = useRecords()
@@ -54,14 +58,14 @@ const Statistics = () => {
     return (
         <Layout>
             <StatisticsTypes type={type} onUpdateType={onUpdateType}></StatisticsTypes>
-            {array.map(([date,records])=>
+            {array.map(([date, records]) =>
                 <div key={date}>
-                    <h3>{date}</h3>
+                    <Date>{date}</Date>
                     <div>{
                         records.map(record => {
                             return <Item key={JSON.stringify(record)}>
                                 <div className="tags">
-                                    {record.tagNames.map((name: string) => <span key={name}>{name}</span>)}
+                                    {record.tagNames.join('，')}
                                 </div>
                                 {record.note && <div className="note">
                                     {record.note}
