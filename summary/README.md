@@ -270,7 +270,7 @@ custom-hook 只是逻辑层面的封装，<strong>只是做了代码拆分，把
 
 
 #### useEffect 是异步执行的 
-> useRecords.tsx 中的 useEffect 是异步执行的。在执行useRecords时，会先执行函数useRecords内的所有同步代码，再执行Statistic.tsx的同步代码，然后才执行 useRecords.tsx 中的 useEffect
+> useRecords.tsx 中的 useEffect 是异步执行的。在执行 Statistic 时，会先执行函数useRecords内的所有同步代码，再执行Statistic.tsx的同步代码，然后才执行 useRecords.tsx 中的 useEffect
 ```
 // useRecords.tsx
 const useRecords = () => {
